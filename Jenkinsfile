@@ -8,7 +8,7 @@ pipeline {
         // Docker Hub repository name
         DOCKER_REPO = 'alzoghby/chat-app'
         // Path on the server to clone the repository
-        CLONE_PATH = '/devops/projects/'
+        CLONE_PATH = '/test/'
         // Docker image tag
         IMAGE_TAG = '2.0'
     }
