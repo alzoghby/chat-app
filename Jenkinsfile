@@ -20,7 +20,7 @@ pipeline {
                     credentialsId: "${GITHUB_CREDENTIALS_ID}", 
                     url: 'https://github.com/alzoghby/chat-app.git'
                 // Move the cloned repository to the desired path
-                sh "mkdir -p ${CLONE_PATH} && mv ${WORKSPACE} ${CLONE_PATH}chat-app"
+                sh " mv ${WORKSPACE} ${CLONE_PATH}chat-app"
             }
         }
         stage('Build Docker Image') {
