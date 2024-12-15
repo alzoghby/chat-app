@@ -8,7 +8,7 @@ pipeline {
         // Docker Hub repository name
         DOCKER_REPO = 'alzoghby/chat-app'
         // Path on the server to clone the repository
-        CLONE_PATH = '/devops/projects/'
+        CLONE_PATH = '/test/'
         // Docker image tag
         IMAGE_TAG = '2.0'
     }
@@ -22,7 +22,7 @@ pipeline {
                 // Clone the GitHub repository
                 git branch: 'main',
                     credentialsId: "${GITHUB_CREDENTIALS_ID}", 
-                    url: 'https://github.com/alzoghby/chat-app.git'
+                    url: 'git@github.com:alzoghby/shared_repo_G2.git'
                 // Move the cloned repository to the desired path
                 sh "mkdir -p ${CLONE_PATH} && mv ${WORKSPACE} ${CLONE_PATH}chat-app"
             }
