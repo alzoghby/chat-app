@@ -8,7 +8,7 @@ pipeline {
         // Docker Hub repository name
         DOCKER_REPO = 'alzoghby/chat-app'
         // Path on the server to clone the repository
-        CLONE_PATH = '/test/'
+        CLONE_PATH = '/devops/projects/'
         // Docker image tag
         IMAGE_TAG = '2.0'
     }
@@ -22,7 +22,7 @@ pipeline {
                 // Clone the GitHub repository
                 git branch: 'main',
                     credentialsId: "${GITHUB_CREDENTIALS_ID}", 
-                    url: 'git@github.com:alzoghby/chat-app.git'
+                    url: 'https://github.com/alzoghby/chat-app.git'
                 // Move the cloned repository to the desired path
                 sh "mkdir -p ${CLONE_PATH} && mv ${WORKSPACE} ${CLONE_PATH}chat-app"
             }
@@ -40,4 +40,22 @@ pipeline {
             steps {
                 script {
                     docker.withRegistry('https://index.docker.io/v1/', DOCKER_CREDENTIALS_ID) {
-                        sh "docker push
+                        sh "docker push ${DOCKER_REPO}:${IMAGE_TAG}"
+                    }
+                }
+            }
+        }
+    }
+    post {
+        always {
+            // Clean up workspace
+            cleanWs()
+        }
+        success {
+            echo "Pipeline completed successfully!"
+        }
+        failure {
+            echo "Pipeline failed!"
+        }
+    }
+}
