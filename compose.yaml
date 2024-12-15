@@ -1,0 +1,20 @@
+services:
+  my-chat-app:
+    image: alzoghby/chat-app:1.1
+    ports: 
+     - 5000:5000
+    networks:
+      - chat
+  website:
+    image: alzoghby/website:latest
+    ports: 
+     - 8080:80
+    networks: 
+     - website
+      
+
+networks: 
+   chat:
+    driver: bridge
+   website:
+    driver: bridge 
