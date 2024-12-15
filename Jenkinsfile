@@ -15,10 +15,6 @@ pipeline {
     stages {
         stage('Clone GitHub Repository') {
             steps {
-                script {
-                    // Clean up the target directory if it exists
-                    sh "rm -rf ${CLONE_PATH}chat-app"
-                }
                 // Clone the GitHub repository
                 git branch: 'main',
                     credentialsId: "${GITHUB_CREDENTIALS_ID}", 
