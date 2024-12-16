@@ -42,4 +42,3 @@ pipeline {
             echo "Pipeline failed!"
         }
     }
-}
