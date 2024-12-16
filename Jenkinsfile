@@ -7,8 +7,7 @@ pipeline {
         GITHUB_CREDENTIALS_ID = 'github'
         // Docker Hub repository name
         DOCKER_REPO = 'alzoghby/chat-app'
-        // Path on the server to clone the repository
-        CLONE_PATH = '/test/'
+        // Path on the server to clone the repositor
         // Docker image tag
         IMAGE_TAG = '2.0'
     }
@@ -16,7 +15,6 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    dir("${CLONE_PATH}chat-app") {
                         sh "docker build -t ${DOCKER_REPO}:${IMAGE_TAG} ."
                     }
                 }
