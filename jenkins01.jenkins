@@ -1,0 +1,50 @@
+pipeline {
+    agent {
+        label "slave"
+    }
+    environment {
+        
+        DOCKER_IMAGE_NAME = 'alzoghby/chat-app'  // Replace with your Docker Hub repository name
+    }
+    tools {
+        nodejs 'NodeJS' // Configure Node.js version in Jenkins Global Tool Configuration
+    }
+    stages {
+        stage('Checkout Code') {
+            steps {
+                git branch: 'main', url: 'https://github.com/alzoghby/chat-app.git' // Replace with your repo
+            }
+        }
+        stage('Install Dependencies') {
+            steps {
+                sh 'npm install'
+            }
+        }
+        stage('Run Tests') {
+            steps {
+                sh 'npm test'
+            }
+        }
+        stage('Build Docker Image') {
+            steps {
+                script {
+                    docker.build("${DOCKER_IMAGE_NAME}:2.1")
+                }
+            }
+        }
+        stage('Push Docker Image to Docker Hub') {
+            steps {
+                script {
+                    docker.withRegistry('https://index.docker.io/v1/', DOCKER_HUB_CREDENTIALS) {
+                        docker.image("${DOCKER_IMAGE_NAME}:latest").push()
+                    }
+                }
+            }
+        }
+    }
+    post {
+        always {
+            cleanWs()
+        }
+    }
+}
