@@ -5,7 +5,7 @@ pipeline {
         DOCKER_IMAGE_NAME = 'alzoghby/test-app'  // Replace with your Docker Hub repository name
     }
     tools {
-        nodejs 'NodeJS' // Ensure NodeJS is configured in Global Tool Configuration
+        nodejs 'nodejs23.5' // Ensure NodeJS is configured in Global Tool Configuration
     }
     stages {
         stage('Checkout Code') {
@@ -28,9 +28,10 @@ pipeline {
         stage('Push Docker Image to Docker Hub') {
             steps {
                 script {
+                         
                     docker.withRegistry('https://hub.docker.com/', DOCKER_HUB_CREDENTIALS) {
-                        docker.image("${DOCKER_IMAGE_NAME}:latest").push()
-                    }
+                    docker.image("${DOCKER_IMAGE_NAME}:latest").push() 
+                    }                       
                 }
             }
         }
