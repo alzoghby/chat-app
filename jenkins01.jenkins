@@ -7,7 +7,7 @@ pipeline {
         DOCKER_IMAGE_NAME = 'alzoghby/chat-app'  // Replace with your Docker Hub repository name
     }
     tools {
-        nodejs 'NodeJS' // Configure Node.js version in Jenkins Global Tool Configuration
+        nodejs 'nodejs23.5' // Configure Node.js version in Jenkins Global Tool Configuration
     }
     stages {
         stage('Checkout Code') {
