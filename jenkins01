@@ -6,7 +6,7 @@ pipeline {
         IMAGE_TAG = '2.0'                      // Docker image tag
     }
     stages {
-        stage('Build Docker Image') {
+        stage('Build Stage') {
             steps {
                 script {
                     sh "docker build -t ${DOCKER_REPO}:${IMAGE_TAG} ."
