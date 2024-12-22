@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent slave
     environment {
         DOCKER_CREDENTIALS_ID = 'docker-hub'   // Docker Hub credentials ID
         DOCKER_REPO = 'alzoghby/chat-app'      // Docker Hub repository name
