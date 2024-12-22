@@ -10,7 +10,7 @@ pipeline {
     stages {
         stage('Checkout Code') {
             steps {
-                git branch: 'main', url: 'https://github.com/your-username/your-repo.git' // Replace with your repo
+                git branch: 'main', url: 'https://github.com/alzoghby/chat-app.git' // Replace with your repo
             }
         }
         stage('Install Dependencies') {
