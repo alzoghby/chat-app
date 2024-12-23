@@ -23,7 +23,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    docker.build("${DOCKER_IMAGE_NAME}:1.0")
+                    docker.build("${DOCKER_IMAGE_NAME}:2.0")
                 }
             }
         }
@@ -32,7 +32,7 @@ pipeline {
                 script {
                          
                  docker.withRegistry('https://index.docker.io/v1/', DOCKER_HUB_CREDENTIALS) {
-                    docker.image("${DOCKER_IMAGE_NAME}:1.0").push() 
+                    docker.image("${DOCKER_IMAGE_NAME}:2.0").push() 
                     }                       
                 }
             }
