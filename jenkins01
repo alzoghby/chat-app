@@ -1,0 +1,47 @@
+pipeline {
+    agent {
+        label 'slave' // Runs only on agents labeled as 'linux'
+    }
+    environment {
+        DOCKER_HUB_CREDENTIALS = 'docker-hub' // Replace with your credentials ID
+        DOCKER_IMAGE_NAME = 'alzoghby/test-app'  // Replace with your Docker Hub repository name
+    }
+    tools {
+        nodejs 'nodejs23.5' // Ensure NodeJS is configured in Global Tool Configuration
+    }
+    stages {
+        stage('Checkout Code') {
+            steps {
+                git branch: 'main', url: 'https://github.com/alzoghby/chat-app.git' // Replace with your repo
+            }
+        }
+        stage('Install Dependencies') {
+            steps {
+                sh 'npm install'
+            }
+        }
+        stage('Build Docker Image') {
+            steps {
+                script {
+                    docker.build("${DOCKER_IMAGE_NAME}:2.0")
+                }
+            }
+        }
+        stage('Push Docker Image to Docker Hub') {
+            steps {
+                script {
+                         
+                 docker.withRegistry('https://index.docker.io/v1/', DOCKER_HUB_CREDENTIALS) {
+                    docker.image("${DOCKER_IMAGE_NAME}:2.0").push() 
+                    }                       
+                }
+            }
+        }
+    }
+    post {
+        always {
+            cleanWs()
+        }
+    }
+}
+
