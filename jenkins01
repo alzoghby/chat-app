@@ -1,5 +1,5 @@
 pipeline {
-    a\gent {
+    agent {
         label 'slave' // Runs only on agents labeled as 'linux'
     }
     environment {
