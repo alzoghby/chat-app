@@ -1,5 +1,7 @@
 pipeline {
-    agent any
+    a\gent {
+        label 'slave' // Runs only on agents labeled as 'linux'
+    }
     environment {
         DOCKER_HUB_CREDENTIALS = 'docker-hub' // Replace with your credentials ID
         DOCKER_IMAGE_NAME = 'alzoghby/test-app'  // Replace with your Docker Hub repository name
